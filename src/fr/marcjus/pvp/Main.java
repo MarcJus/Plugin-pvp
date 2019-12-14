@@ -55,17 +55,19 @@ public class Main extends JavaPlugin {
 	public void eliminate(Player victim) {
 		
 		if(players.contains(victim))players.remove(victim);
-		victim.setGameMode(GameMode.SPECTATOR);
-		checkWin();
+		if(!checkWin())victim.setGameMode(GameMode.SPECTATOR);
 		
 	}
 
-	public void checkWin() {
+	public boolean checkWin() {
 		
 		if(players.size() == 1){
 			Player winner = players.get(0);
 			Bukkit.broadcastMessage("§2"+winner.getName()+ " §egagne la partie!");
 			setState(Gstate.FINISH);
+			return true;
+		}else{
+			return false;
 		}
 		
 	}
